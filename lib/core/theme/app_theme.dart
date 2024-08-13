@@ -6,5 +6,6 @@ final ThemeData appTheme = ThemeData(
   primaryColor: AppColors.primary,
   hintColor: AppColors.secondary,
   scaffoldBackgroundColor: AppColors.background,
+  appBarTheme: AppBarTheme(backgroundColor: Colors.white),
   fontFamily: 'Poppins',
 );

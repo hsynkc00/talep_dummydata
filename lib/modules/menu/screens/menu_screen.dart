@@ -3,13 +3,13 @@ import '../../../core/core.dart';
 import '../widgets/card.dart';
 
 class MenuScreen extends StatelessWidget {
+  const MenuScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(
-          title: Text("Anasayfa"),
-        ),
-        body: Padding(
+      appBar: CustomAppBar(title: Text("Anasayfa")),
+      body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,8 +47,8 @@ class MenuScreen extends StatelessWidget {
                 icon: Icons.cancel,
               ),
             ],
-          ),
-        ),
-        bottomNavigationBar: NavBar());
+          )),
+      bottomNavigationBar: NavBar(),
+    );
   }
 }

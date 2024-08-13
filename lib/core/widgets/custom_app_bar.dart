@@ -9,12 +9,11 @@ class CustomAppBar extends AppBar {
       IconButton(
           onPressed: null,
           padding: EdgeInsets.all(16),
-          iconSize: 40,
+          iconSize: 32,
           icon: Icon(
-            Icons.account_circle_rounded,
-            color: Colors.black54,
+            Icons.settings_outlined,
+            color: Colors.black38,
           ))
     ],
   });
 }
-

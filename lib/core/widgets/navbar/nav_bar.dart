@@ -1,13 +1,18 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:talep_dummydata/core/core.dart';
+import 'package:talep_dummydata/core/widgets/navbar/controller.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final navBarController = Get.put(NavbarController());
+
     return BottomNavigationBar(
       items: [
         BottomNavigationBarItem(
@@ -29,6 +34,11 @@ class NavBar extends StatelessWidget {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       iconSize: 30,
+      onTap: (index) {
+        navBarController.navigate(index);
+      },
+
+      // currentIndex: navBarController.selectedIndex.value,
     );
   }
 }
