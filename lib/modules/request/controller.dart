@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:talep_dummydata/data/models/request_model.dart';
 
 class RequestController extends GetxController {
+  var requests = <Request>[].obs;
+
   final TextEditingController requesterController = TextEditingController();
   final TextEditingController departmentController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
@@ -20,7 +22,9 @@ class RequestController extends GetxController {
       id: DateTime.now().toString(),
       requester: requesterController.text,
       department: departmentController.text,
-      creationDate: DateTime.now().toString(), // DateTime formatlanabilir
+      creationDate: DateTime.now()
+          .toString()
+          .substring(0, 10), // DateTime formatlanabilir
       status:
           'pending', // Sabit değer olabilir veya kullanıcı girişi yapılabilir
       amount: int.parse(amountController.text),
@@ -33,8 +37,7 @@ class RequestController extends GetxController {
       description: descriptionController.text,
     );
 
-    // Burada yeni talebi bir listeye ekleyebilir veya bir API'ye gönderebilirsiniz.
-    // requests.add(newRequest);
+    requests.add(newRequest);
   }
 
   @override

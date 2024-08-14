@@ -1,3 +1,4 @@
+// lib/modules/request/widgets/request_text_field.dart
 import 'package:flutter/material.dart';
 import 'package:talep_dummydata/core/core.dart';
 
@@ -6,10 +7,12 @@ class RequestTextField extends StatelessWidget {
   final String hintText;
   final bool isPassword;
   final int? maxLines;
+  final TextEditingController controller;
 
   RequestTextField({
     required this.labelText,
     required this.hintText,
+    required this.controller,
     this.isPassword = false,
     this.maxLines,
   });
@@ -24,12 +27,11 @@ class RequestTextField extends StatelessWidget {
           Text(
             labelText,
             style: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-            ),
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 8),
           TextField(
+            controller: controller,
             obscureText: isPassword,
             maxLines: maxLines,
             cursorColor: AppColors.primary,

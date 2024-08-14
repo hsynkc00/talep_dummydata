@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
-import 'package:talep_dummydata/modules/profile/screens/profile_screen.dart';
-import 'package:talep_dummydata/modules/request/screens/add_request.dart';
-// import '../core/widgets/navbar/bindings.dart';
+import 'package:talep_dummydata/modules/menu/bindings.dart';
 import '../modules/modules.dart';
 
 class AppRoutes {
@@ -9,7 +7,7 @@ class AppRoutes {
   static const menu = '/menu';
   static const profile = '/profile';
   static const addRequest = '/addRequest';
-
+  static const pendingRequest = '/pendingRequest';
 
   static final routes = [
     GetPage(
@@ -20,10 +18,24 @@ class AppRoutes {
     GetPage(
       name: menu,
       page: () => MenuScreen(),
+      binding: RequestBindings(),
       transition: Transition.cupertino,
     ),
-    // GetPage(name: navbar, page: () => LoginScreen(), binding: NavBarBinding())
-    GetPage(name: profile, page: () => ProfileScreen()),
-    GetPage(name: addRequest, page: () => AddRequestScreen())
+    GetPage(
+        name: profile,
+        page: () => ProfileScreen(),
+        transition: Transition.cupertino),
+    GetPage(
+      name: addRequest,
+      page: () => AddRequestScreen(),
+      binding: RequestBindings(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: pendingRequest,
+      page: () => PendingRequestsScreen(),
+      binding: RequestBindings(),
+      transition: Transition.cupertino,
+    )
   ];
 }
