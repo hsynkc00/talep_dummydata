@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import '../controller.dart';
 import '../widgets/custom_text_field.dart';
 
-class LoginScreen extends GetView<LoginController> {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final LoginController controller = Get.find<LoginController>();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -45,18 +47,22 @@ class LoginScreen extends GetView<LoginController> {
                         ),
                       ),
                       SizedBox(height: 24),
-                      CustomTextField(labelText: "E posta"),
+                      CustomTextField(
+                        labelText: "E posta",
+                        controller: controller.emailController,
+                      ),
                       SizedBox(height: 16),
                       CustomTextField(
                         labelText: "Şifre",
                         obscureText: true,
                         suffixIcon: Icon(Icons.visibility_off),
+                        controller: controller.passwordController,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 30.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            controller.goToMenu();
+                            controller.signIn();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red[700],

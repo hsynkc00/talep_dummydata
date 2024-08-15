@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343451698730",
+    "project_id": "talepdemo",
+    "storage_bucket": "talepdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343451698730:android:8074a0677cba8f5e4c6553",
+        "android_client_info": {
+          "package_name": "com.example.talep_dummydata"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-MPFUEtuFLdiHGS_1QXNgYBwsG8NQd7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
