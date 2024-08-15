@@ -88,8 +88,26 @@ class AddRequestScreen extends StatelessWidget {
                     child: CustomButton(
                       onTap: () {
                         requestController.addRequest();
-                        Get.snackbar(
-                            "Talep Oluşturuldu", "Talebiniz Cevap Bekliyor.");
+                        Get.defaultDialog(
+                            title: "Talebiniz oluşturuldu",
+                            content: Text("Talebiniz Cevap Bekliyor."),
+                            cancel: ElevatedButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                            confirm: ElevatedButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text(
+                                  "Confirm",
+                                  style: TextStyle(color: Colors.blue),
+                                )));
                       },
                     ),
                   ),

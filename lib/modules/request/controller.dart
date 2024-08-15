@@ -22,11 +22,8 @@ class RequestController extends GetxController {
       id: DateTime.now().toString(),
       requester: requesterController.text,
       department: departmentController.text,
-      creationDate: DateTime.now()
-          .toString()
-          .substring(0, 10), // DateTime formatlanabilir
-      status:
-          'pending', // Sabit değer olabilir veya kullanıcı girişi yapılabilir
+      creationDate: DateTime.now().toString().substring(0, 10),
+      status: 'pending',
       amount: int.parse(amountController.text),
       unit: unitController.text,
       stockCode: stockCodeController.text,
@@ -38,21 +35,19 @@ class RequestController extends GetxController {
     );
 
     requests.add(newRequest);
+    clearControllers();
   }
 
-  @override
-  void onClose() {
-    // TextEditingController'ları kapatın.
-    requesterController.dispose();
-    departmentController.dispose();
-    amountController.dispose();
-    unitController.dispose();
-    stockCodeController.dispose();
-    stockNameController.dispose();
-    feature1Controller.dispose();
-    feature2Controller.dispose();
-    feature3Controller.dispose();
-    descriptionController.dispose();
-    super.onClose();
+  void clearControllers() {
+    requesterController.clear();
+    departmentController.clear();
+    amountController.clear();
+    unitController.clear();
+    stockCodeController.clear();
+    stockNameController.clear();
+    feature1Controller.clear();
+    feature2Controller.clear();
+    feature3Controller.clear();
+    descriptionController.clear();
   }
 }

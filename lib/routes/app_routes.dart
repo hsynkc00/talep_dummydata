@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:talep_dummydata/modules/menu/bindings.dart';
 import '../modules/modules.dart';
 
 class AppRoutes {

@@ -9,12 +9,12 @@ class NavbarController extends GetxController {
 
         break;
       case 1:
-        Get.toNamed('/addRequest', preventDuplicates: true);
+        Get.offAllNamed('/addRequest');
         // Get.toNamed('/addRequest');
 
         break;
       case 2:
-        Get.toNamed('/profile', preventDuplicates: true);
+        Get.offAllNamed('/profile');
         // Get.toNamed('/profile');
 
         break;
