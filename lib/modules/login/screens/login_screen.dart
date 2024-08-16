@@ -60,23 +60,30 @@ class LoginScreen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 30.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            controller.signIn();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red[700],
-                            minimumSize: Size(
-                                double.infinity,
-                                MediaQuery.of(context).size.height *
-                                    0.07), // Buton yüksekliği ekranın %7'si
-                          ),
-                          child: Text(
-                            'Giriş Yap',
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Poppins'),
-                          ),
-                        ),
+                        child: Obx(() {
+                          return controller.isLoading.value
+                              ? CircularProgressIndicator()
+                              : ElevatedButton(
+                                  onPressed: () {
+                                    controller.login();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Colors.red[700], // Buton rengi
+                                    minimumSize: Size(
+                                      double.infinity,
+                                      MediaQuery.of(context).size.height * 0.07,
+                                    ), 
+                                  ),
+                                  child: Text(
+                                    'Giriş Yap',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Poppins',
+                                    ),
+                                  ),
+                                );
+                        }),
                       ),
                     ],
                   ),

@@ -4,7 +4,8 @@ class NavbarController extends GetxController {
   void navigate(int index) {
     switch (index) {
       case 0:
-        Get.toNamed('/menu', preventDuplicates: true);
+        
+        Get.offAllNamed('/menu',);
         // Get.toNamed('/menu');
 
         break;

@@ -7,6 +7,7 @@ class AppRoutes {
   static const profile = '/profile';
   static const addRequest = '/addRequest';
   static const pendingRequest = '/pendingRequest';
+  static const settings = '/settings';
 
   static final routes = [
     GetPage(
@@ -17,24 +18,28 @@ class AppRoutes {
     GetPage(
       name: menu,
       page: () => MenuScreen(),
-      binding: RequestBindings(),
-      transition: Transition.cupertino,
     ),
     GetPage(
         name: profile,
         page: () => ProfileScreen(),
-        transition: Transition.cupertino),
+        ),
     GetPage(
       name: addRequest,
       page: () => AddRequestScreen(),
       binding: RequestBindings(),
-      transition: Transition.cupertino,
+
     ),
     GetPage(
       name: pendingRequest,
       page: () => PendingRequestsScreen(),
       binding: RequestBindings(),
-      transition: Transition.cupertino,
-    )
+
+    ),
+    GetPage(
+      name: settings,
+      page: () => SettingsScreen(),
+      binding: LoginBindings(),
+      transition: Transition.fade
+    ) 
   ];
 }

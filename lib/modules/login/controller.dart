@@ -2,33 +2,60 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/core.dart';
-
 class LoginController extends GetxController {
-  final AuthService _authService = AuthService();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> signIn() async {
-    try {
-      // Firebase ile kullanıcı giriş işlemi yapılıyor
-      User? user = await _authService.signInWithEmailAndPassword(
-        emailController.text,
-        passwordController.text,
-      );
+  var isLoggedIn = false.obs;
+  var isLoading = false.obs;
+  User? user;
 
-      // Giriş başarılı, yönlendirme yapılabilir
-      Get.offAllNamed('/home');
-    } catch (e) {
-      // Hata durumunda snackbar ile mesaj gösteriliyor
-      Get.snackbar('Error', e.toString());
+  final TextEditingController emailController =
+      TextEditingController(text: "huso@gural.com");
+  final TextEditingController passwordController =
+      TextEditingController(text: "123456");
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Kullanıcı oturumu kontrol edilir ve ilgili ekranlara yönlendirilir.
+    ever(isLoggedIn, handleAuthChanged);
+  }
+
+  void handleAuthChanged(bool isLoggedIn) {
+    if (isLoggedIn) {
+      Get.offAllNamed('/menu'); // Giriş başarılı, home sayfasına yönlendirilir
+    } else {
+      Get.offAllNamed(
+          '/login'); // Kullanıcı oturum açmadıysa login sayfasına yönlendirilir
     }
   }
 
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
+  Future<void> login() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      Get.snackbar("Error", "Email and password cannot be empty");
+      return;
+    }
+
+    try {
+      isLoading.value = true;
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      user = userCredential.user;
+      isLoggedIn.value = true;
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar("Login Error", e.message!);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> logout() async {
+    await _auth.signOut();
+    isLoggedIn.value = false;
   }
 }
