@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:talep_dummydata/modules/modules.dart';
 import 'routes/app_routes.dart';
 import 'core/core.dart';
-
 import 'package:get/get.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -26,9 +24,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme,
       initialRoute: '/login',
-      // home: Scaffold(
-      //   appBar: ,
-      // ),
       getPages: AppRoutes.routes,
     );
   }

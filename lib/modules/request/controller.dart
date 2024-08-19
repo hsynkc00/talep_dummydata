@@ -1,9 +1,11 @@
 // lib/modules/request/controller.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:talep_dummydata/data/models/request_model.dart';
 
 class RequestController extends GetxController {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   var requests = <Request>[].obs;
 
   final TextEditingController requesterController = TextEditingController();

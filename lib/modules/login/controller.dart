@@ -23,7 +23,7 @@ class LoginController extends GetxController {
 
   void handleAuthChanged(bool isLoggedIn) {
     if (isLoggedIn) {
-      Get.offAllNamed('/menu'); // Giriş başarılı, home sayfasına yönlendirilir
+      Get.offAllNamed('/base'); // Giriş başarılı, home sayfasına yönlendirilir
     } else {
       Get.offAllNamed(
           '/login'); // Kullanıcı oturum açmadıysa login sayfasına yönlendirilir

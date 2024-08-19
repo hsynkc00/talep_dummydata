@@ -3,6 +3,7 @@ import '../modules/modules.dart';
 
 class AppRoutes {
   static const login = '/login';
+  static const base = '/base';
   static const menu = '/menu';
   static const profile = '/profile';
   static const addRequest = '/addRequest';
@@ -16,30 +17,32 @@ class AppRoutes {
       binding: LoginBindings(),
     ),
     GetPage(
+      name: base,
+      page: () => MainScreen(),
+      binding: BaseBindings(),
+    ),
+    GetPage(
       name: menu,
       page: () => MenuScreen(),
     ),
     GetPage(
-        name: profile,
-        page: () => ProfileScreen(),
-        ),
+      name: profile,
+      page: () => ProfileScreen(),
+    ),
     GetPage(
       name: addRequest,
       page: () => AddRequestScreen(),
       binding: RequestBindings(),
-
     ),
     GetPage(
       name: pendingRequest,
       page: () => PendingRequestsScreen(),
       binding: RequestBindings(),
-
     ),
     GetPage(
-      name: settings,
-      page: () => SettingsScreen(),
-      binding: LoginBindings(),
-      transition: Transition.fade
-    ) 
+        name: settings,
+        page: () => SettingsScreen(),
+        binding: LoginBindings(),
+        transition: Transition.fade)
   ];
 }

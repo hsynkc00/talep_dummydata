@@ -1,2 +1,2 @@
-export 'adding_request/add_request.dart';
-export 'show_request/pending_request.dart';
+export 'add_request.dart';
+export '../../menu/screens/sub_screens/pending_request.dart';

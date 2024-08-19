@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../data/models/request_model.dart';
-import '../../controller.dart';
+import '../../../request/controller.dart';
 
 class PendingRequestsScreen extends StatelessWidget {
   @override
@@ -34,7 +34,7 @@ class PendingRequestsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       boxShadow: [
-                        BoxShadow(
+                        const BoxShadow(
                           color: Color(0XFFFF7700),
                           spreadRadius: 1,
                           blurRadius: 3,

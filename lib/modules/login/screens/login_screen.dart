@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talep_dummydata/core/core.dart';
 
 import '../controller.dart';
 import '../widgets/custom_text_field.dart';
@@ -61,28 +62,29 @@ class LoginScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 30.0),
                         child: Obx(() {
-                          return controller.isLoading.value
-                              ? CircularProgressIndicator()
-                              : ElevatedButton(
-                                  onPressed: () {
-                                    controller.login();
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Colors.red[700], // Buton rengi
-                                    minimumSize: Size(
-                                      double.infinity,
-                                      MediaQuery.of(context).size.height * 0.07,
-                                    ), 
-                                  ),
-                                  child: Text(
+                          return ElevatedButton(
+                            onPressed: () {
+                              controller.login();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary, // Buton rengi
+                              minimumSize: Size(
+                                double.infinity,
+                                MediaQuery.of(context).size.height * 0.07,
+                              ),
+                            ),
+                            child: controller.isLoading.value
+                                ? CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : Text(
                                     'Giriş Yap',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Poppins',
                                     ),
                                   ),
-                                );
+                          );
                         }),
                       ),
                     ],
