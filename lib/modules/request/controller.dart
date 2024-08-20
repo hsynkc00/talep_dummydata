@@ -6,6 +6,7 @@ import 'package:talep_dummydata/data/models/request_model.dart';
 
 class RequestController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   var requests = <Request>[].obs;
 
   final TextEditingController requesterController = TextEditingController();
@@ -19,7 +20,14 @@ class RequestController extends GetxController {
   final TextEditingController feature3Controller = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  void addRequest() {
+  //Ekran açıldığında verileri çekmek için
+  @override
+  void onInit() {
+    super.onInit();
+    fetchPendingRequests();
+  }
+
+  void addRequest() async {
     final newRequest = Request(
       id: DateTime.now().toString(),
       requester: requesterController.text,
@@ -36,8 +44,22 @@ class RequestController extends GetxController {
       description: descriptionController.text,
     );
 
+    await firestore.collection('requests').add(newRequest.toJson());
     requests.add(newRequest);
     clearControllers();
+  }
+
+  //firestoredan veri getirme
+  void fetchPendingRequests() async {
+    final querySnapshot = await firestore
+        .collection('requests')
+        .where('status', isEqualTo: 'pending')
+        .get();
+
+    requests.clear(); // Önceki verileri temizle
+    for (var doc in querySnapshot.docs) {
+      requests.add(Request.fromJson(doc.data()));
+    }
   }
 
   void clearControllers() {
@@ -51,5 +73,19 @@ class RequestController extends GetxController {
     feature2Controller.clear();
     feature3Controller.clear();
     descriptionController.clear();
+  }
+
+  @override
+  void onClose() {
+    requesterController.dispose();
+    departmentController.dispose();
+    amountController.dispose();
+    unitController.dispose();
+    stockCodeController.dispose();
+    stockNameController.dispose();
+    feature1Controller.dispose();
+    feature2Controller.dispose();
+    feature3Controller.dispose();
+    descriptionController.dispose();
   }
 }

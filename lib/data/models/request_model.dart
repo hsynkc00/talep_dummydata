@@ -28,4 +28,42 @@ class Request {
     required this.feature3,
     required this.description,
   });
+
+  //JSON to Object
+  factory Request.fromJson(Map<String, dynamic> json) {
+    return Request(
+      id: json['id'],
+      requester: json['requester'],
+      department: json['department'],
+      creationDate: json['creationDate'],
+      status: json['status'],
+      amount: json['amount'],
+      unit: json['unit'],
+      stockCode: json['stockCode'],
+      stockName: json['stockName'],
+      feature1: json['feature1'],
+      feature2: json['feature2'],
+      feature3: json['feature3'],
+      description: json['description'],
+    );
+  }
+
+  //Object to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'requester': requester,
+      'department': department,
+      'creationDate': creationDate,
+      'status': status,
+      'amount': amount,
+      'unit': unit,
+      'stockCode': stockCode,
+      'stockName': stockName,
+      'feature1': feature1,
+      'feature2': feature2,
+      'feature3': feature3,
+      'description': description,
+    };
+  }
 }
