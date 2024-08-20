@@ -54,6 +54,32 @@ class LoginController extends GetxController {
     }
   }
 
+  Future<void> signup() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      Get.snackbar("Error", "Email and password cannot be empty");
+      return;
+    }
+    try {
+      isLoading.value = true;
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      user = userCredential.user;
+      Get.snackbar("Success", "Account created successfully");
+      Get.offAllNamed('/login'); // Kayıt başarılı, giriş sayfasına yönlendir
+    } on FirebaseAuthException catch (e) {
+      Get.snackbar("Signup Error", e.message!);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   Future<void> logout() async {
     await _auth.signOut();
     isLoggedIn.value = false;

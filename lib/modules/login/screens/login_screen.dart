@@ -87,6 +87,25 @@ class LoginScreen extends StatelessWidget {
                           );
                         }),
                       ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 32),
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.toNamed('/signup');
+                              },
+                              child: Center(
+                                  child: Text(
+                                "Hesabınız yok mu ?",
+                                style: TextStyle(
+                                    color: Color(0XFFA5A9B4),
+                                    fontWeight: FontWeight.w500),
+                              )),
+                            ),
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

@@ -3,6 +3,7 @@ import '../modules/modules.dart';
 
 class AppRoutes {
   static const login = '/login';
+  static const signup = '/signup';
   static const base = '/base';
   static const menu = '/menu';
   static const profile = '/profile';
@@ -16,6 +17,7 @@ class AppRoutes {
       page: () => LoginScreen(),
       binding: LoginBindings(),
     ),
+    GetPage(name: signup, page: () => SignupScreen()),
     GetPage(
       name: base,
       page: () => MainScreen(),
@@ -43,6 +45,6 @@ class AppRoutes {
         name: settings,
         page: () => SettingsScreen(),
         binding: LoginBindings(),
-        transition: Transition.fade)
+        transition: Transition.cupertino)
   ];
 }
