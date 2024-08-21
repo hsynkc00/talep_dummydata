@@ -15,5 +15,3 @@ class NavBarController extends GetxController {
     currentIndex.value = index;
   }
 }
-
-

@@ -4,8 +4,8 @@ import 'package:talep_dummydata/core/core.dart';
 
 import '../../data/controllers/controller.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class BaseScreen extends StatelessWidget {
+  const BaseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class CustomAppBar extends AppBar {
   CustomAppBar({
     required super.title,
@@ -12,7 +11,6 @@ class CustomAppBar extends AppBar {
             IconButton(
               onPressed: () {
                 try {
-                  print("selam");
                   Get.toNamed('/settings');
                 } catch (e) {
                   print("Hata: $e");
