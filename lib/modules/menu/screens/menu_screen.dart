@@ -7,7 +7,6 @@ class MenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final MenuItemController controller = Get.find<MenuItemController>();
     final MenuItemController controller = Get.find<MenuItemController>();
 
     return Padding(
