@@ -11,16 +11,24 @@ class AddRequestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final RequestController requestController = Get.find<RequestController>();
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              margin: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               decoration: BoxDecoration(
-                  color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
               child: Column(
                 children: [
                   RequestTextField(
@@ -77,39 +85,40 @@ class AddRequestScreen extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: CustomButton(
-                    onTap: () {
-                      requestController.addRequest();
-                      Get.defaultDialog(
-                          title: "Talebiniz oluşturuldu",
-                          content: const Text("Talebiniz Cevap Bekliyor."),
-                          cancel: ElevatedButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: const Text(
-                              "Cancel",
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          confirm: ElevatedButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              child: const Text(
-                                "Confirm",
-                                style: TextStyle(color: Colors.blue),
-                              )));
-                    },
-                  ),
+                CustomButton(
+                  onTap: () {
+                    requestController.addRequest();
+                    requestController.getAllUsernames();
+                    // Get.defaultDialog(
+                    //   title: "Talebiniz Oluşturuldu",
+                    //   content: const Text("Talebiniz cevap bekliyor."),
+                    //   cancel: ElevatedButton(
+                    //     onPressed: () {
+                    //       Get.back();
+                    //     },
+                    //     child: const Text(
+                    //       "İptal",
+                    //       style: TextStyle(color: Colors.red),
+                    //     ),
+                    //   ),
+                    //   confirm: ElevatedButton(
+                    //     onPressed: () {
+                    //       Get.back();
+                    //     },
+                    //     child: const Text(
+                    //       "Onayla",
+                    //       style: TextStyle(color: Colors.blue),
+                    //     ),
+                    //   ),
+                    // );
+                  },
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

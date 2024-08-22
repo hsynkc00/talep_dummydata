@@ -15,6 +15,8 @@ class LoginController extends GetxController {
       TextEditingController(text: "huso@gural.com");
   final TextEditingController passwordController =
       TextEditingController(text: "123456");
+  final TextEditingController usernameController =
+      TextEditingController(text: "");
 
   //ever fonksiyonuna verilen değişkende değişiklikler göründüğünde her seferinde callback oluşturur
 
@@ -60,8 +62,9 @@ class LoginController extends GetxController {
   Future<void> signup() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
+    String username = usernameController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty || username.isEmpty) {
       Get.snackbar("Error", "Eposta ve şifre boş bırakılamaz.");
       return;
     }
@@ -75,6 +78,7 @@ class LoginController extends GetxController {
       await firestore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': email,
+        'username': username
       });
       user = userCredential.user;
       Get.snackbar("Başarılı", "Hesabınız başarıyla oluşturulmuştur.");

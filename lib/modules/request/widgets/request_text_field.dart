@@ -20,16 +20,19 @@ class RequestTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             labelText,
-            style: TextStyle(
-                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.black87,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           TextField(
             controller: controller,
             obscureText: isPassword,
@@ -37,15 +40,17 @@ class RequestTextField extends StatelessWidget {
             cursorColor: AppColors.primary,
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: TextStyle(color: Colors.black12),
+              hintStyle: const TextStyle(color: Colors.black26),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: Colors.grey.shade200,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
+                borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide.none,
               ),
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 16,
+              ),
             ),
           ),
         ],

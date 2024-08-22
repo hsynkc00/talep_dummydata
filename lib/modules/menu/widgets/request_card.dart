@@ -9,130 +9,134 @@ class RequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Get.toNamed('/requestDetail',arguments: request),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  const BoxShadow(
-                    color: Color(0XFFFF7700),
-                    spreadRadius: 1,
-                    blurRadius: 3,
-                    offset: Offset(0, 1),
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Table(
-                  children: [
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Talep Eden",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            Text(request.requester),
-                          ],
-                        ),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Stok Adı",
-                                style: TextStyle(fontWeight: FontWeight.w600)),
-                            Text(request.stockName),
-                          ],
-                        ),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Departman",
-                                style: TextStyle(fontWeight: FontWeight.w600)),
-                            Text(request.department),
-                          ],
-                        ),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Oluşturma Tarihi",
-                                style: TextStyle(fontWeight: FontWeight.w600)),
-                            Text(request.creationDate),
-                          ],
-                        ),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Durum",
-                                style: TextStyle(fontWeight: FontWeight.w600)),
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                color: Color(0XFFFF7700).withOpacity(0.48),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(Icons.hourglass_empty_rounded,
-                                      color: Color(0XFFFF7700)),
-                                  SizedBox(
-                                      width:
-                                          4), // İkon ile metin arasında biraz boşluk ekleyin
-                                  Text(
-                                    "Cevap Bekleyen",
-                                    style: TextStyle(
-                                        color: Color(
-                                          0XFFFF7700,
-                                        ),
-                                        fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ]),
-                  ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 3,
+                  blurRadius: 8,
+                  offset: Offset(0, 3),
                 ),
+              ],
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildRow("Talep Eden", request.requester),
+                  Divider(thickness: 1, color: Colors.grey[300]),
+                  _buildRow("Stok Adı", request.stockName),
+                  Divider(thickness: 1, color: Colors.grey[300]),
+                  _buildRow("Departman", request.department),
+                  Divider(thickness: 1, color: Colors.grey[300]),
+                  _buildRow("Oluşturma Tarihi", request.creationDate),
+                  Divider(thickness: 1, color: Colors.grey[300]),
+                  _buildStatusRow("Durum", "Cevap Bekleyen",
+                      Icons.hourglass_empty_rounded, Color(0XFFFF7700)),
+                  _buildTextButton()
+                ],
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  TextButton _buildTextButton() {
+    return TextButton(
+        onPressed: () => Get.toNamed('/requestDetail', arguments: request),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              "Detay",
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey,
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: Colors.grey)
           ],
-        ),
+        ));
+  }
+
+  Widget _buildRow(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+              fontSize: 14,
+            ),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              color: Colors.black54,
+              fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatusRow(
+      String title, String status, IconData icon, Color color) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+              fontSize: 14,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  color: color,
+                  size: 16,
+                ),
+                SizedBox(width: 4),
+                Text(
+                  status,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

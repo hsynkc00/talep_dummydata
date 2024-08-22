@@ -13,7 +13,7 @@ class RequestController extends GetxController {
 
   final TextEditingController requesterController = TextEditingController();
   final TextEditingController departmentController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
+  late final TextEditingController amountController = TextEditingController();
   final TextEditingController unitController = TextEditingController();
   final TextEditingController stockCodeController = TextEditingController();
   final TextEditingController stockNameController = TextEditingController();
@@ -63,9 +63,28 @@ class RequestController extends GetxController {
         .where('status', isEqualTo: 'pending')
         .get();
 
-    requests.clear(); // Önceki verileri temizle
+    requests.clear(); // Önceki verileri temizleme
     for (var doc in querySnapshot.docs) {
       requests.add(Request.fromJson(doc.data()));
+    }
+  }
+
+  Future<void> getAllUsernames() async {
+    try {
+      // 'users' koleksiyonundaki tüm belgeleri alıyoruz
+      QuerySnapshot querySnapshot =
+          await FirebaseFirestore.instance.collection('users').get();
+
+      // Her bir belgedeki 'username' özelliğini alıyoruz
+      querySnapshot.docs.forEach((doc) {
+        if (doc.exists) {
+          // Belgedeki 'username' özelliğini alıyoruz
+          String username = doc.get('username');
+          print("Kullanıcı Adı: $username");
+        }
+      });
+    } catch (e) {
+      print("Veriler alınırken hata oluştu: $e");
     }
   }
 

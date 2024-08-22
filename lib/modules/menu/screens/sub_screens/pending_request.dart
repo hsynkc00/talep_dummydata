@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:talep_dummydata/core/core.dart';
 import '../../../../data/models/request_model.dart';
 import '../../../request/controller.dart';
 import '../../widgets/request_card.dart';
@@ -9,9 +10,7 @@ class PendingRequestsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final RequestController requestController = Get.find<RequestController>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cevap Bekleyen Talepler'),
-      ),
+      appBar: CustomAppBar(title: Text("Cevap Bekleyen Talepler")),
       body: Obx(() {
         final pendingRequests = requestController.requests
             .where((request) => request.status == 'pending')
@@ -25,8 +24,7 @@ class PendingRequestsScreen extends StatelessWidget {
           itemCount: pendingRequests.length,
           itemBuilder: (context, index) {
             final Request request = pendingRequests[index];
-            return RequestCard(
-                request: request);
+            return RequestCard(request: request);
           },
         );
       }),

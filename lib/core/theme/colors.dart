@@ -15,5 +15,7 @@ class AppColors {
   static const Color menuDarkGreen = Color(0XFF278527);
   static const Color menuDarkRed = Color(0XFFE11818);
 
+  static const Color approve = Color(0XFF50CD89);
+  static const Color reject = Color(0XFFFE5D7A);
   // Diğer renkler
 }

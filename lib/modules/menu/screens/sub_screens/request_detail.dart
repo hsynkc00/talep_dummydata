@@ -46,12 +46,10 @@ class RequestDetail extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(
-                  height:
-                      16), // RichText ile Divider arasında boşluk bırakmak için
+              const SizedBox(height: 16),
               Divider(
-                color: Colors.grey.shade400, // Divider rengini belirleyin
-                thickness: 1.5, // Divider kalınlığını ayarlayın
+                color: Colors.grey.shade400,
+                thickness: 1.5,
               ),
               const SizedBox(height: 16),
               Container(

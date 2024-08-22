@@ -67,12 +67,12 @@ class SignupScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 24),
-                      // CustomTextField(
-                      //     labelText: "Adınız", controller: controller.emailController),
-                      // SizedBox(height: 16,),
-                      //    CustomTextField(
-                      //     labelText: "Soyadınız", controller: controller.emailController),
-                      // SizedBox(height: 16,),
+                      CustomTextField(
+                          labelText: "Kullanıcı Adınız",
+                          controller: controller.usernameController),
+                      SizedBox(
+                        height: 16,
+                      ),
                       CustomTextField(
                         controller: controller.emailController,
                         labelText: 'E posta',
