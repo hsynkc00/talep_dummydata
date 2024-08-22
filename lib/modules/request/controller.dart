@@ -1,11 +1,13 @@
 // lib/modules/request/controller.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:talep_dummydata/data/models/request_model.dart';
 
 class RequestController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   var requests = <Request>[].obs;
 
@@ -28,6 +30,8 @@ class RequestController extends GetxController {
   }
 
   void addRequest() async {
+    final user = auth.currentUser;
+
     final newRequest = Request(
       id: DateTime.now().toString(),
       requester: requesterController.text,
@@ -42,6 +46,7 @@ class RequestController extends GetxController {
       feature2: feature2Controller.text,
       feature3: feature3Controller.text,
       description: descriptionController.text,
+      userId: user!.uid,
     );
 
     await firestore.collection('requests').add(newRequest.toJson());
@@ -51,8 +56,10 @@ class RequestController extends GetxController {
 
   //firestoredan veri getirme
   void fetchPendingRequests() async {
+    final user = auth.currentUser;
     final querySnapshot = await firestore
         .collection('requests')
+        .where('userId', isEqualTo: user!.uid)
         .where('status', isEqualTo: 'pending')
         .get();
 

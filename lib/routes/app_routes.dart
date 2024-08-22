@@ -9,6 +9,7 @@ class AppRoutes {
   static const profile = '/profile';
   static const addRequest = '/addRequest';
   static const pendingRequest = '/pendingRequest';
+  static const requestDetail = '/requestDetail';
   static const settings = '/settings';
 
   static final routes = [
@@ -17,10 +18,14 @@ class AppRoutes {
       page: () => LoginScreen(),
       binding: LoginBindings(),
     ),
-    GetPage(name: signup, page: () => SignupScreen()),
+    GetPage(
+      name: signup,
+      page: () => SignupScreen(),
+      binding: LoginBindings(),
+    ),
     GetPage(
       name: base,
-      page: () => MainScreen(),
+      page: () => BaseScreen(),
       binding: BaseBindings(),
     ),
     GetPage(
@@ -40,6 +45,12 @@ class AppRoutes {
       name: pendingRequest,
       page: () => PendingRequestsScreen(),
       binding: RequestBindings(),
+    ),
+    GetPage(
+      name: requestDetail,
+      page: () => RequestDetail(
+        request: Get.arguments,
+      ),
     ),
     GetPage(
         name: settings,

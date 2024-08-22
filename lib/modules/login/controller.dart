@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   var isLoggedIn = false.obs;
   var isLoading = false.obs;
@@ -14,6 +16,8 @@ class LoginController extends GetxController {
   final TextEditingController passwordController =
       TextEditingController(text: "123456");
 
+  //ever fonksiyonuna verilen değişkende değişiklikler göründüğünde her seferinde callback oluşturur
+
   @override
   void onInit() {
     super.onInit();
@@ -23,10 +27,9 @@ class LoginController extends GetxController {
 
   void handleAuthChanged(bool isLoggedIn) {
     if (isLoggedIn) {
-      Get.offAllNamed('/base'); // Giriş başarılı, home sayfasına yönlendirilir
+      Get.offAllNamed('/base');
     } else {
-      Get.offAllNamed(
-          '/login'); // Kullanıcı oturum açmadıysa login sayfasına yönlendirilir
+      Get.offAllNamed('/login');
     }
   }
 
@@ -59,7 +62,7 @@ class LoginController extends GetxController {
     String password = passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      Get.snackbar("Error", "Email and password cannot be empty");
+      Get.snackbar("Error", "Eposta ve şifre boş bırakılamaz.");
       return;
     }
     try {
@@ -69,12 +72,15 @@ class LoginController extends GetxController {
         email: email,
         password: password,
       );
-
+      await firestore.collection('users').doc(userCredential.user!.uid).set({
+        'uid': userCredential.user!.uid,
+        'email': email,
+      });
       user = userCredential.user;
-      Get.snackbar("Success", "Account created successfully");
+      Get.snackbar("Başarılı", "Hesabınız başarıyla oluşturulmuştur.");
       Get.offAllNamed('/login'); // Kayıt başarılı, giriş sayfasına yönlendir
     } on FirebaseAuthException catch (e) {
-      Get.snackbar("Signup Error", e.message!);
+      Get.snackbar("Hata", e.message!);
     } finally {
       isLoading.value = false;
     }
