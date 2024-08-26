@@ -27,7 +27,7 @@ class CheckButton extends StatelessWidget {
     return GestureDetector(
       onTap: null,
       child: Container(
-        width: 124,
+        width: 126,
         color: color,
         child: Padding(
           padding: const EdgeInsets.all(16.0),

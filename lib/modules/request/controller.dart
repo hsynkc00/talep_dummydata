@@ -32,6 +32,8 @@ class RequestController extends GetxController {
   void addRequest() async {
     final user = auth.currentUser;
 
+    if (user == null) return;
+
     final newRequest = Request(
       id: DateTime.now().toString(),
       requester: requesterController.text,
@@ -46,10 +48,15 @@ class RequestController extends GetxController {
       feature2: feature2Controller.text,
       feature3: feature3Controller.text,
       description: descriptionController.text,
-      userId: user!.uid,
+      userId: user.uid,
     );
 
-    await firestore.collection('requests').add(newRequest.toJson());
+    final requestDocRef = firestore.collection('requests').doc(user.uid);
+
+    await requestDocRef.set({
+      'requests': FieldValue.arrayUnion([newRequest.toJson()]),
+    }, SetOptions(merge: true));
+
     requests.add(newRequest);
     clearControllers();
   }
@@ -57,15 +64,20 @@ class RequestController extends GetxController {
   //firestoredan veri getirme
   void fetchPendingRequests() async {
     final user = auth.currentUser;
-    final querySnapshot = await firestore
-        .collection('requests')
-        .where('userId', isEqualTo: user!.uid)
-        .where('status', isEqualTo: 'pending')
-        .get();
 
-    requests.clear(); // Önceki verileri temizleme
-    for (var doc in querySnapshot.docs) {
-      requests.add(Request.fromJson(doc.data()));
+    if (user == null) return;
+
+    final docSnapshot =
+        await firestore.collection('requests').doc(user.uid).get();
+
+    if (docSnapshot.exists) {
+      final data = docSnapshot.data();
+      final List<dynamic> requestList = data?['requests'] ?? [];
+
+      requests.clear();
+      for (var requestData in requestList) {
+        requests.add(Request.fromJson(requestData));
+      }
     }
   }
 
